@@ -1,4 +1,6 @@
 aid: sempra-energy
+tags:
+  - Fortune 500
 url: 
   https://raw.githubusercontent.com/api-evangelist/sempra-energy/refs/heads/main/apis.yml
 modified: '2026-03-24'
