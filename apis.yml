@@ -6,6 +6,8 @@ url:
 modified: '2026-03-24'
 apis: []
 common:
+  - type: DomainSecurity
+    url: security/sempra-energy-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/sempra
   - type: Website

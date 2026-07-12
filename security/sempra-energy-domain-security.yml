@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.sempra-energy.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 30 03:56:47 2026 GMT
+  hsts: null
+domains:
+- domain: sempra-energy.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
