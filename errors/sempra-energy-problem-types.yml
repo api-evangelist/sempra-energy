@@ -1,0 +1,59 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  Fault envelopes observed directly on https://api.sempra.com during unauthenticated probes
+  on 2026-08-28. Sempra Energy publishes no error reference; only the shapes actually
+  returned by the gateway are recorded here. Nothing is derived from an OpenAPI, because
+  none is published.
+api: Sempra Developer Portal APIs
+format: apigee-fault
+format_note: >-
+  NOT RFC 9457. The gateway returns the Google Apigee fault envelope with
+  Content-Type application/json:
+  {"fault":{"faultstring":"<human message>","detail":{"errorcode":"<dotted.error.code>"}}}.
+  There is no `type`, `title`, `status`, `detail` or `instance` member, no
+  application/problem+json media type, and no documentation URL in the payload.
+envelope:
+  root: fault
+  message_field: fault.faultstring
+  code_field: fault.detail.errorcode
+  media_type: application/json
+coverage_note: >-
+  These are gateway-level faults only. Any application-level error catalog sits behind the
+  OAuth wall on the /v1 proxy and is not observable anonymously.
+problem_types:
+- code: messaging.adaptors.http.flow.ApplicationNotFound
+  status: 404
+  title: No API proxy routed for this path
+  faultstring: 'Unable to identify proxy for host: apigee_host and url: <path>'
+  meaning: >-
+    The requested basepath has no Apigee proxy deployed on this environment. Observed on /,
+    /v2/graphql, /oauth/token and every /.well-known/* path.
+  remediation: >-
+    Use a routed basepath. Only /v1 was found routed on api.sempra.com as of 2026-08-28.
+  observed_at: '2026-08-28'
+  evidence_url: https://api.sempra.com/
+- code: oauth.v2.InvalidAccessToken
+  status: 401
+  title: Missing or invalid OAuth 2.0 access token
+  faultstring: Invalid access token
+  www_authenticate: Bearer realm="null",error="invalid_token"
+  meaning: >-
+    The Apigee OAuthV2 VerifyAccessToken policy rejected the request because no
+    Authorization bearer token was presented. Observed on every path under /v1.
+  remediation: >-
+    Present a valid OAuth 2.0 bearer token. Credentials are issued only through
+    https://developer.sempra.com after registration.
+  observed_at: '2026-08-28'
+  evidence_url: https://api.sempra.com/v1/graphql
+- code: keymanagement.service.invalid_access_token
+  status: 401
+  title: Access token not recognised by key management
+  faultstring: Invalid Access Token
+  meaning: >-
+    A syntactically acceptable bearer token was presented but is not a token Apigee key
+    management issued for this organization. Distinct from oauth.v2.InvalidAccessToken,
+    which is returned when no token is presented at all.
+  remediation: Obtain a token issued for the Apigee organization "sempra".
+  observed_at: '2026-08-28'
+  evidence_url: https://api.sempra.com/v1/graphql

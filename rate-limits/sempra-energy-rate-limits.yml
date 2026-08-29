@@ -1,0 +1,33 @@
+generated: '2026-08-28'
+method: searched
+source: https://developer.sempra.com/
+docs: https://developer.sempra.com/
+limit_count: 0
+note: >-
+  Sempra Energy documents no rate limits, quotas, burst allowances or throttling response
+  headers on any public surface. The API program runs on Google Apigee (api.sempra.com
+  returns the Apigee messaging.adaptors.http.flow.ApplicationNotFound fault for unrouted
+  requests), and Apigee Quota/SpikeArrest policies are commonly applied there — but
+  nothing about them is published. A proxy IS routed at basepath /v1, but it rejects every
+  anonymous request at the OAuthV2 policy (HTTP 401) before any quota policy could emit a
+  header, so no live rate-limit signal is observable and nothing is asserted here. The portal's
+  anonymous API catalog is empty, so there is no operation, product or plan whose limits
+  could be read. This is a documented absence, not an inference that limits do not exist.
+limits: []
+response_headers: []
+exhaustion_status: null
+evidence:
+- url: https://api.sempra.com/
+  status: 404
+  detail: >-
+    Apigee runtime fault {"fault":{"faultstring":"Unable to identify proxy for host:
+    apigee_host and url: /","detail":{"errorcode":
+    "messaging.adaptors.http.flow.ApplicationNotFound"}}} — no rate-limit headers present.
+- url: https://api.sempra.com/v1/graphql
+  status: 401
+  detail: >-
+    Routed Apigee proxy; WWW-Authenticate Bearer challenge and oauth.v2.InvalidAccessToken
+    fault. No X-RateLimit-*, RateLimit-* or Retry-After header on the response.
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+  status: 200
+  detail: Anonymous API catalog is empty (apiDocs [], apiProducts []).

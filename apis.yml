@@ -1,5 +1,16 @@
 aid: sempra-energy
 name: "Sempra Energy"
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 accessModel:
   pricing: unknown
@@ -15,18 +26,119 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sempra-energy.png
 tags:
   - Fortune 500
+  - Energy
+  - Utilities
+  - Natural Gas
+  - Electricity
+  - Energy Infrastructure
+  - LNG
+  - Apigee
 url: 
   https://raw.githubusercontent.com/api-evangelist/sempra-energy/refs/heads/main/apis.yml
-modified: '2026-03-24'
-apis: []
+created: '2026-03-24'
+modified: '2026-08-28'
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+apis:
+  - name: Sempra Developer Portal APIs
+    description: >-
+      Sempra Energy runs a Google Apigee API program. api.sempra.com is the Apigee
+      runtime gateway — an unrouted request returns the genuine Apigee
+      messaging.adaptors.http.flow.ApplicationNotFound JSON fault — and
+      developer.sempra.com is an Apigee integrated developer portal (Apigee organization
+      "sempra", site id "sempra-prod") whose home page reads "Sempra Developer Portal —
+      Sign up today and start using Sempra APIs". Both hosts present DigiCert EV
+      certificates issued to O=Sempra Energy, San Diego, California, which is how
+      ownership was established. As of 2026-08-28 the portal publishes NOTHING to
+      anonymous visitors: its own catalog endpoint
+      /portals/api/sites/sempra-prod/liveportal/apis returns HTTP 200 with
+      "apiDocs": [] and "apiProducts": [], and the only header menu items are "APIs" and
+      "Log In". No OpenAPI, reference, operation list, plan or rate limit is publicly
+      reachable — every API product is gated behind portal registration. Anonymous probing
+      does establish that a live proxy is routed at basepath /v1: every path under it
+      (/v1/graphql, /v1/token, /v1/graphql/health) returns HTTP 401 with an Apigee OAuthV2
+      fault and a WWW-Authenticate Bearer challenge, while /v2/* and /oauth/token return the
+      Apigee "no proxy routed" 404. The gateway advertises GET, PUT, POST, DELETE, OPTIONS
+      and PATCH via a wildcard CORS policy, so there is a real read/write surface behind the
+      OAuth wall — but no operation, schema or scope is published.
+    humanURL: https://developer.sempra.com
+    baseURL: https://api.sempra.com/v1
+    tags:
+      - Energy
+      - Utilities
+      - Apigee
+      - Developer Portal
+    properties:
+      - type: DeveloperPortal
+        url: https://developer.sempra.com
+      - type: Login
+        url: https://developer.sempra.com/login
 common:
   - type: DomainSecurity
     url: security/sempra-energy-domain-security.yml
+  - type: Plans
+    url: plans/sempra-energy-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sempra-energy-rate-limits.yml
+  - type: LLMsTxt
+    url: llms/sempra-energy-llms.txt
+  - type: Authentication
+    url: authentication/sempra-energy-authentication.yml
+  - type: ErrorCatalog
+    url: errors/sempra-energy-problem-types.yml
+  - type: Conventions
+    url: conventions/sempra-energy-conventions.yml
+  - type: Packages
+    url: packages/sempra-energy-packages.yml
+  - type: DeveloperPortal
+    url: https://developer.sempra.com
   - type: LinkedIn
     url: https://www.linkedin.com/company/sempra
   - type: Website
     url: https://www.sempra-energy.com
 description: >-
-  Sempra Energy is a North American energy infrastructure company with operations
-  in Texas, California, Mexico, and emerging markets serving utility customers and
-  developing energy infrastructure.
+  Sempra Energy is a San Diego-headquartered North American energy infrastructure
+  holding company and a Fortune 500 constituent, operating regulated utilities and
+  energy infrastructure across California, Texas and Mexico. Its businesses include San
+  Diego Gas & Electric and Southern California Gas Company in California, Oncor
+  Electric Delivery in Texas, and Sempra Infrastructure, which develops LNG export
+  terminals, natural gas pipelines and renewable generation in North America. Sempra
+  operates a Google Apigee API program — an API gateway at api.sempra.com and a
+  developer portal at developer.sempra.com inviting developers to "sign up today and
+  start using Sempra APIs" — but publishes no API product, contract or reference to
+  unauthenticated visitors, so the entire integration surface sits behind portal
+  registration.
+x-enrichment:
+  date: '2026-08-28'
+  status: minimal
+  artifacts_added: 8
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: partner-login
+  detail: >-
+    Sempra Energy's Google Apigee developer portal at developer.sempra.com is publicly
+    reachable and invites developers to "sign up today and start using Sempra APIs", but
+    its own anonymous catalog endpoint /portals/api/sites/sempra-prod/liveportal/apis
+    answers HTTP 200 with "apiDocs": [] and "apiProducts": [] — not one API product is
+    published to unauthenticated visitors, so the contract, reference and operation list
+    exist only behind portal registration and login. A live proxy is routed at
+    https://api.sempra.com/v1 and answers every anonymous request with an Apigee
+    oauth.v2.InvalidAccessToken 401, so the API is real and callable — just not by anyone
+    who has not been issued a token through that portal.
+  evidence:
+    - url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+      status: 200
+    - url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/menus
+      status: 200
+    - url: https://api.sempra.com/v1/graphql
+      status: 401
+    - url: https://api.sempra.com/
+      status: 404
+    - url: https://www.sempra.com/robots.txt
+      status: 200
+    - url: https://www.sempra.com/.well-known/security.txt
+      status: 403
+  checked: '2026-08-28'

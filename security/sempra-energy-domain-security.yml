@@ -1,15 +1,51 @@
-generated: '2026-07-11'
+generated: '2026-08-28'
 method: probed
-source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts; HSTS values corrected by hand-probe (see
+  hsts_note)
 hosts:
 - host: www.sempra-energy.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Aug 30 03:56:47 2026 GMT
-  hsts: null
+  cert_expires: Oct 28 04:49:43 2026 GMT
+  hsts: false
+  hsts_source: HEAD https://www.sempra-energy.com/ -> 301 to https://www.sempra.com/ with no Strict-Transport-Security
+    header
+- host: developer.sempra.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Dec 27 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+  hsts_preload: true
+  hsts_source: 'GET https://developer.sempra.com/ -> 200, Strict-Transport-Security: max-age=63072000;
+    preload'
+- host: api.sempra.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Jan 21 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 86400
+  hsts_source: 'GET https://api.sempra.com/ -> 404, Strict-Transport-Security: max-age=86400'
+- host: www.sempra.com
+  https: true
+  tls_version: TLSv1.3
+  hsts: false
+  note: 'Cloudflare managed challenge (cf-mitigated: challenge); GET / returns 403 with no Strict-Transport-Security
+    header.'
 domains:
 - domain: sempra-energy.com
   dnssec: false
   caa: []
   spf: false
   dmarc: false
+- domain: sempra.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+hsts_note: probe-domain-security.py reads HSTS from a HEAD request and treats any non-2xx as "unknown".
+  api.sempra.com answers HEAD / with an Apigee 404 and developer.sempra.com answers HEAD / with 403 for
+  the probe user-agent, so both were recorded as null on the automated pass. A hand GET on 2026-08-28
+  shows BOTH hosts do serve Strict-Transport-Security; the values below are the observed ones. www.sempra.com
+  sits behind a Cloudflare managed challenge (403) and served no HSTS header on the challenge response.

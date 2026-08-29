@@ -1,0 +1,136 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  Direct unauthenticated HTTP probes of every Sempra Energy host named in apis.yml
+  plus the Apigee gateway (api.sempra.com) and Apigee integrated developer portal
+  (developer.sempra.com) discovered during STEP 0b contract discovery. Both of those
+  hosts present DigiCert EV certificates issued to O=Sempra Energy, San Diego, CA.
+note: >-
+  No /.well-known document is served by any Sempra Energy host. api.sempra.com is an
+  Apigee runtime and answers every unrouted path with a genuine Apigee
+  messaging.adaptors.http.flow.ApplicationNotFound JSON fault (404). developer.sempra.com
+  is an Angular single-page app with a catch-all route: it returns HTTP 200 and the same
+  2,138-byte index.html shell for EVERY path, including every /.well-known/* path probed
+  here, so those 200s are NOT documents and are recorded as misses. www.sempra.com sits
+  behind a Cloudflare managed challenge and answered 403 (cf-mitigated: challenge) on
+  every path. No WellKnown or SecurityTxt pointer is emitted in apis.yml because nothing
+  returned a real document.
+hosts:
+- host: api.sempra.com
+  note: Apigee API gateway runtime; real JSON 404 faults, not an SPA catch-all.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: developer.sempra.com
+  note: >-
+    Apigee integrated developer portal (Angular SPA, site id sempra-prod). Every path
+    returns 200 with the identical 2138-byte HTML shell — an SPA catch-all, not a
+    document. All rows below are misses despite the 200.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not a security.txt.
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not JSON.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not JSON.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not JSON.
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not a linkset.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not JSON.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not an A2A AgentCard object.
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    result: miss
+    detail: SPA shell (text/html, 2138 bytes) — not an A2A AgentCard object.
+- host: www.sempra.com
+  note: >-
+    Corporate site behind a Cloudflare managed challenge (cf-mitigated: challenge).
+    /robots.txt is served (200) but every other path answered 403 with the
+    "Just a moment..." interstitial.
+  documents:
+  - path: /robots.txt
+    status: 200
+    file: null
+    result: served
+    detail: >-
+      Cloudflare-managed robots.txt. Content-Signal search=yes, ai-train=no,
+      use=reference; ClaudeBot, GPTBot, CCBot, Google-Extended, Amazonbot,
+      Applebot-Extended, Bytespider and meta-externalagent are Disallow: /.
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 403
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+  - path: /.well-known/api-catalog
+    status: 403
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 403
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 403
+    file: null
+  - path: /.well-known/agent.json
+    status: 403
+    file: null
+  - path: /llms.txt
+    status: 403
+    file: null
+- host: www.sempra-energy.com
+  note: 301 redirects to https://www.sempra.com/ — same Cloudflare challenge applies.
+  documents:
+  - path: /
+    status: 301
+    file: null
+    detail: Redirects to https://www.sempra.com/ (403 Cloudflare challenge).

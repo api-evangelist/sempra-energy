@@ -1,0 +1,79 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  Live unauthenticated probes of https://api.sempra.com and the anonymous endpoints of the
+  Apigee developer portal at https://developer.sempra.com, 2026-08-28. Sempra Energy
+  publishes no conventions, style guide or API reference, so every field below is either an
+  observed gateway behaviour or an explicit "not published". Nothing is inferred.
+api: Sempra Developer Portal APIs
+base_url: https://api.sempra.com/v1
+auth_style:
+  value: OAuth 2.0 bearer token in the Authorization header
+  method: probed
+  see: authentication/sempra-energy-authentication.yml
+error_envelope:
+  value: Google Apigee fault envelope (fault.faultstring + fault.detail.errorcode)
+  rfc9457: false
+  method: probed
+  see: errors/sempra-energy-problem-types.yml
+versioning:
+  value: URI path versioning
+  detail: >-
+    The single routed proxy basepath is /v1. /v2/* is not routed (Apigee
+    ApplicationNotFound). No versioning or deprecation policy is published.
+  method: probed
+idempotency:
+  supported: unknown
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    Not published and not observable anonymously — the /v1 proxy rejects every request at
+    the OAuth policy before any application semantics are reachable.
+pagination:
+  style: unknown
+  params: []
+  response_fields: []
+  note: Not published; no reference or spec exists to read it from.
+field_expansion:
+  supported: unknown
+  note: Not published.
+metadata:
+  supported: unknown
+  note: Not published.
+request_id_tracing:
+  supported: partial
+  detail: >-
+    The Apigee developer portal's own liveportal API returns a request_id on every JSON
+    response (e.g. {"request_id":"2062379729"}). No correlation or request-id header was
+    observed on the api.sempra.com gateway responses.
+  method: probed
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was returned on any observed
+    response. See rate-limits/sempra-energy-rate-limits.yml — limit_count 0.
+cors:
+  access_control_allow_origin: '*'
+  access_control_allow_methods: GET, PUT, POST, DELETE, OPTIONS, PATCH
+  access_control_allow_headers: '*'
+  access_control_max_age: 3628800
+  method: probed
+dry_run_mode:
+  supported: unknown
+  note: Not published and not observable behind the OAuth wall.
+reversibility:
+  grade: unknown
+  write_surface: unknown
+  note: >-
+    NOT ASSESSABLE, and deliberately not graded `na`. The gateway advertises PUT, POST,
+    DELETE and PATCH in its CORS policy, so a write surface very likely exists — but no
+    operation, reversal path (cancel/refund/void/reverse/undo/rollback/restore) or reversal
+    window is published anywhere, and none is reachable without a token. Recording `na`
+    would assert this is a read-only API, which the CORS methods contradict; recording a
+    window would invent one. The honest answer is that Sempra Energy publishes nothing an
+    agent could use to know whether an action it takes here can be taken back.
+  reversal_operations: []
+  windows: []
+  method: probed

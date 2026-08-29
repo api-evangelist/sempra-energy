@@ -1,0 +1,39 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  Unauthenticated registry searches on 2026-08-28 — registry.npmjs.org search (0 results
+  for "sempra"), pypi.org/pypi/sempra/json (HTTP 404), rubygems.org search (empty array),
+  crates.io search (0 results) — plus api.github.com/orgs lookups for "sempra",
+  "sempra-energy", "SempraEnergy" and "sempra-infrastructure" (all HTTP 404, no GitHub
+  organization exists). The Apigee developer portal at developer.sempra.com publishes no
+  SDK or download page; its anonymous API catalog is empty.
+package_count: 0
+official_package_count: 0
+note: >-
+  Sempra Energy publishes no first-party client library, SDK, CLI or CDN-distributed build
+  in any public package registry, and operates no public GitHub organization. This is a
+  verified absence, not an unchecked field. Consistent with the rest of the profile: the
+  API program is real (a live OAuth-protected Apigee proxy at api.sempra.com/v1) but
+  nothing about it — spec, reference, SDK — is published to unauthenticated developers.
+packages: []
+registries_checked:
+- registry: npm
+  query: https://registry.npmjs.org/-/v1/search?text=sempra
+  status: 200
+  results: 0
+- registry: pypi
+  query: https://pypi.org/pypi/sempra/json
+  status: 404
+  results: 0
+- registry: rubygems
+  query: https://rubygems.org/api/v1/search.json?query=sempra
+  status: 200
+  results: 0
+- registry: crates.io
+  query: https://crates.io/api/v1/crates?q=sempra
+  status: 200
+  results: 0
+- registry: github
+  query: https://api.github.com/orgs/sempra
+  status: 404
+  results: 0

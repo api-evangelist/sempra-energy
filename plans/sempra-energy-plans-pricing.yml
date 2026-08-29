@@ -1,0 +1,26 @@
+generated: '2026-08-28'
+method: searched
+source: https://developer.sempra.com/
+docs: https://developer.sempra.com/
+plan_count: 0
+note: >-
+  Sempra Energy publishes no API plans, tiers, quotas or pricing. Its Apigee integrated
+  developer portal at developer.sempra.com has exactly two header menu items — "APIs"
+  and "Log In" (read from the portal's own anonymous menu endpoint,
+  /portals/api/sites/sempra-prod/liveportal/menus, HTTP 200) — and no pricing page. The
+  portal's anonymous API catalog endpoint
+  (/portals/api/sites/sempra-prod/liveportal/apis, HTTP 200) returns
+  "apiDocs": [] and "apiProducts": [], so there is no API product to attach a plan to.
+  The portal's own Terms and Conditions page still contains the placeholder text
+  "(TO DO)". Any commercial terms are settled after registration/login, not published.
+plans: []
+evidence:
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+  status: 200
+  detail: '{"apiDocs":[],"apiProducts":[],"apiCategoryList":[{"name":"DEV"},{"name":"Use Case"}]}'
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/menus
+  status: 200
+  detail: headerMenus = ["APIs", "Log In"]; no pricing or plans menu item.
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/page/terms
+  status: 200
+  detail: 'Page title "Terms and Conditions"; body is the literal placeholder "(TO DO)".'
