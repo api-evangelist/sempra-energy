@@ -3,7 +3,9 @@ title: '<a href="https://www.sempra.com/newsroom/spotlight-articles/energy-and-n
   hreflang="en">Energy and National Security: Conversation with Jeffrey W. Martin
   and LTG H.R. McMaster </a>'
 url: https://www.sempra.com/newsroom/spotlight-articles/energy-and-national-security-conversation-with-jeffrey-w-martin
-date: '2026-05-08'
+published: ''
+date_basis: harvested
+harvested: '2026-05-08'
 author: sempra_ian
 feed_url: http://www.sempra.com/newsroom/feed
 ---

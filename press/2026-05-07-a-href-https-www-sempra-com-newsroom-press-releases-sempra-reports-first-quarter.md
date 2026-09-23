@@ -2,7 +2,9 @@
 title: <a href="https://www.sempra.com/newsroom/press-releases/sempra-reports-first-quarter-2026-results"
   hreflang="en">Sempra Reports First-Quarter 2026 Results</a>
 url: https://www.sempra.com/newsroom/press-releases/sempra-reports-first-quarter-2026-results
-date: '2026-05-07'
+published: ''
+date_basis: harvested
+harvested: '2026-05-07'
 author: fp-admin
 feed_url: http://www.sempra.com/newsroom/feed
 ---

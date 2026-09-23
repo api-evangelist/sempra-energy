@@ -1,7 +1,9 @@
 ---
 title: Sempra Energy and National Renewable ...
 url: https://www.sempra.com/sempra-energy-and-national-renewable-energy-laboratory-collaborate-advance-future-net-zero-energy
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Sempra Energy" press release artificial intelligence'
 position: 2
 source: serpapi-google

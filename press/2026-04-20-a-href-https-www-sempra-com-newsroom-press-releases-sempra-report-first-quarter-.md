@@ -2,7 +2,9 @@
 title: <a href="https://www.sempra.com/newsroom/press-releases/sempra-report-first-quarter-2026-earnings-may-7"
   hreflang="en">Sempra to Report First-Quarter 2026 Earnings on May 7</a>
 url: https://www.sempra.com/newsroom/press-releases/sempra-report-first-quarter-2026-earnings-may-7
-date: '2026-04-20'
+published: ''
+date_basis: harvested
+harvested: '2026-04-20'
 author: fp-admin
 feed_url: http://www.sempra.com/newsroom/feed
 ---

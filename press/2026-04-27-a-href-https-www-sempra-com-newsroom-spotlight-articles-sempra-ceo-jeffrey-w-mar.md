@@ -2,7 +2,9 @@
 title: <a href="https://www.sempra.com/newsroom/spotlight-articles/sempra-ceo-jeffrey-w-martin-advancing-americas-economic-competitiveness"
   hreflang="en">Advancing America’s Economic Competitiveness</a>
 url: https://www.sempra.com/newsroom/spotlight-articles/sempra-ceo-jeffrey-w-martin-advancing-americas-economic-competitiveness
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: sempra_ian
 feed_url: http://www.sempra.com/newsroom/feed
 ---

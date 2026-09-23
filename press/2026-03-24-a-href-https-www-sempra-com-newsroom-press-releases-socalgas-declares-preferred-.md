@@ -2,7 +2,9 @@
 title: <a href="https://www.sempra.com/newsroom/press-releases/socalgas-declares-preferred-dividends-10"
   hreflang="en">SoCalGas Declares Preferred Dividends</a>
 url: https://www.sempra.com/newsroom/press-releases/socalgas-declares-preferred-dividends-10
-date: '2026-03-24'
+published: ''
+date_basis: harvested
+harvested: '2026-03-24'
 author: fp-admin
 feed_url: http://www.sempra.com/newsroom/feed
 ---

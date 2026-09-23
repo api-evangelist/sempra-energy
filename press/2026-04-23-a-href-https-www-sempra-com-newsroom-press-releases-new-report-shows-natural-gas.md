@@ -3,7 +3,9 @@ title: <a href="https://www.sempra.com/newsroom/press-releases/new-report-shows-
   hreflang="en">New Report Shows Natural Gas Infrastructure Helps Keep Energy Costs
   More Affordable for California Households</a>
 url: https://www.sempra.com/newsroom/press-releases/new-report-shows-natural-gas-infrastructure-helps-keep-energy-costs-more
-date: '2026-04-23'
+published: ''
+date_basis: harvested
+harvested: '2026-04-23'
 author: fp-admin
 feed_url: http://www.sempra.com/newsroom/feed
 ---

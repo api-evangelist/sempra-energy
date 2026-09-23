@@ -1,7 +1,9 @@
 ---
 title: Acquired 13% stake in Sempra Infrastructure Partners for ...
 url: https://www.linkedin.com/posts/cppinvestmentsinvestissementsrpc_we-have-entered-into-a-definitive-agreement-activity-7376233520333168640-6bQZ
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Sempra Energy" press release artificial intelligence'
 position: 4
 source: serpapi-google

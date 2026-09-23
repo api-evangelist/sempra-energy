@@ -3,7 +3,9 @@ title: <a href="https://www.sempra.com/newsroom/spotlight-articles/jeffrey-w-mar
   hreflang="en">Sempra Chairman and CEO Jeffrey W. Martin speaks with Jim Cramer on
   CNBC’s Mad Money </a>
 url: https://www.sempra.com/newsroom/spotlight-articles/jeffrey-w-martin-cnbc-mad-money-interview
-date: '2026-03-26'
+published: ''
+date_basis: harvested
+harvested: '2026-03-26'
 author: sempra_ian
 feed_url: http://www.sempra.com/newsroom/feed
 ---

@@ -1,7 +1,9 @@
 ---
 title: February 27, 2020 Sempra Energy ...
 url: https://www.sec.gov/Archives/edgar/data/0000086521/000008652120000003/ex9912019123110-k.htm
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Sempra Energy" press release artificial intelligence'
 position: 5
 source: serpapi-google

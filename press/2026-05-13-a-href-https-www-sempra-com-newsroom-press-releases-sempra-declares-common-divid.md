@@ -2,7 +2,9 @@
 title: <a href="https://www.sempra.com/newsroom/press-releases/sempra-declares-common-dividend-4"
   hreflang="en">Sempra Declares Common Dividend</a>
 url: https://www.sempra.com/newsroom/press-releases/sempra-declares-common-dividend-4
-date: '2026-05-13'
+published: ''
+date_basis: harvested
+harvested: '2026-05-13'
 author: sempra_bryan
 feed_url: http://www.sempra.com/newsroom/feed
 ---
